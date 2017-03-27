@@ -1,3 +1,6 @@
 /public_html/css/
 /public_html/node_modules/
 /nbproject/
+/node_modules/
+/css/
+/js/bundle.js

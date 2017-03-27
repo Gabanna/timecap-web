@@ -1,0 +1,32 @@
+<form id="dialogForm" action="">
+    <link rel="stylesheet" type="text/css" href="lib/jquery.datetimepicker.min.css">
+
+    <div class="data">
+        <div>
+            <label for="location_start">Ort</label>
+            <input id="location_start" class="location start" name="locationId_start" disabled="disabled">
+        </div>
+        <div>
+            <label for="time_start">Zeitpunkt</label>
+            <input id="time_start" class="time start" name="time_end" type="text" required="required">
+        </div>
+    </div>
+
+    <div class="spacer end"></div>
+    
+    <div class="data">
+        <div>
+            <label for="location_end" class="end">Ort</label>
+            <input id="location_end" class="location end" name="locationId_end" disabled="disabled">
+        </div>
+        <div>
+            <label for="time_end" class="end">Zeitpunkt</label>
+            <input id="time_end" class="time end" name="time_end" type="text">
+        </div>
+    </div>
+
+    <input id="userId" type="hidden" value="" name="userId">
+
+    <script src="lib/jquery.datetimepicker.full.min.js"></script>
+    <script src="js/editElement.js"></script>
+</form>
