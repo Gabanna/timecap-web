@@ -15,7 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function () {
+module.exports = (function () {
+    'use strict';
 
     var dialogOptions = {
         modal: true,
@@ -42,7 +43,7 @@
 
     function showNewDialog(date) {
         var elementString;
-        if (date && typeof date === Number) {
+        if (date) {
             elementString = '<div class="dialog newElement" title="neuer Eintrag" data-date="' + date.valueOf() + '"></div>';
         } else {
             elementString = '<div class="dialog newElement" title="neuer Eintrag"></div>';
@@ -59,7 +60,8 @@
         $('.xdsoft_datetimepicker ').remove();
     }
 
-    DialogManager = {};
+    var DialogManager = {};
     DialogManager.showNewDialog = showNewDialog;
     DialogManager.showEditDialog = showEditDialog;
+    return DialogManager;
 })();

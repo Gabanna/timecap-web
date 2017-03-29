@@ -16,10 +16,11 @@
  */
 
 /*global Exporter, DialogManager*/
-(function () {
+module.exports = (function () {
+    'use strict';
 
-    require('./exporter.js');
-    require('./dialogManager.js');
+    var Exporter = require('./exporter.js');
+    var DialogManager = require('./dialogManager.js');
 
     function renderScheduler(loadDataCallback) {
         $(window).resize(function () {
@@ -33,17 +34,22 @@
 
         var view = $('body').width() < 500 ? 'agendaDay' : 'agendaWeek';
 
+        var rightHeader = 'agendaWeek,listMonth newEvent';
+        if (Exporter.exportEnabled()) {
+            rightHeader += ',export';
+        }
+
         $('.calendar').fullCalendar({
             defaultView: view,
-            events: loadDataCallback,
+            events: onLoad,
             schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
             locale: 'de',
-            timezone: 'UTC',
             defaultTimedEventDuration: '00:15:00',
             allDaySlot: false,
             minTime: '07:00:00',
             maxTime: '22:00:00',
-            titleFormat: 'YYYY', 
+            titleFormat: 'MMMM YYYY',
+            nowIndicator: true,
             columnFormat: 'ddd DD.MM',
             weekNumbersWithinDays: true,
             hiddenDays: 3,
@@ -56,21 +62,39 @@
                 },
                 export: {
                     text: 'Exportieren',
-                    click: exportDates
+                    click: onExport
                 }
             },
             header: {
                 left: 'prev,next today title',
-                right: 'agendaWeek,month newEvent,export'
+                right: rightHeader
             }
         });
+
+        function onLoad(start, end, timezone, callback) {
+            loadDataCallback(start, end, timezone, function (data, events) {
+                var moment = $('.calendar').fullCalendar('getDate');
+                Exporter.createTable(moment, data).then(function (table) {
+                    $('.export').html(table);
+                });
+                callback(events);
+            });
+        }
+
+        function onExport() {
+            Exporter.copyToClipBoard()
+                    .then(function (result) {
+                        if (result) {
+                            $().toastmessage('showSuccessToast', 'Der aktuelle Monat wurde in die Zwischenablage kopiert');
+                        
+                        } else {
+                            $().toastmessage('showWarningToast', 'Der aktuelle Monat konnte nicht in die Zwischenablage kopiert werden');
+                        }
+                    });
+        }
     }
 
-    function exportDates() {
-        var moment = $('.calendar').fullCalendar('getDate');
-        Exporter.exportTable(moment);
-    }
-
-    Scheduler = {};
+    var Scheduler = {};
     Scheduler.renderScheduler = renderScheduler;
+    return Scheduler;
 })();

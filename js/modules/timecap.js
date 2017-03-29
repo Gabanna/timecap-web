@@ -15,7 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function () {
+module.exports = (function () {
+    'use strict';
 
     function getEventsForUser(user, start, end) {
         return $.ajax({
@@ -51,8 +52,10 @@
         });
     }
 
-    Timecap = {};
+    var Timecap = {};
     Timecap.getEventsForUser = getEventsForUser;
     Timecap.newEvent = newEvent;
     Timecap.getLocationsForUser = getLocationsForUser;
+    Timecap.updateEvent = updateEvent;
+    return Timecap;
 })();

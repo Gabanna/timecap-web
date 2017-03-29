@@ -100,6 +100,8 @@ app.get('/:userId/locations', function (req, res) {
 
 app.post('/time-events', function (req, res) {
     var data = req.body;
+    console.log(data);
+    console.log();
     data.id = generateUuid();
 
     events.push(data);
@@ -110,9 +112,11 @@ app.post('/time-events', function (req, res) {
 app.put('/time-events/:id', function (req, res) {
     var id = req.params.id;
     var data = req.body;
-
-    events.forEach(function(element, index) {
-        if(element.id === id) {
+    console.log(data);
+    console.log();
+    
+    events.forEach(function (element, index) {
+        if (element.id === id) {
             events[index] = data;
         }
     });

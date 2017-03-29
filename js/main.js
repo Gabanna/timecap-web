@@ -15,25 +15,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*global moment, Scheduler, Timecap*/
-
 moment = require('moment');
 jQuery = $ = require('jquery');
-require('../node_modules/jquery-ui-dist/jquery-ui.min.js');
+require('../lib/jquery.toastmessage');
+require('../node_modules/jquery-ui-dist/jquery-ui.min');
 require('fullcalendar');
 require('fullcalendar-scheduler');
-require('../node_modules/fullcalendar/dist/locale/de.js');
+require('../node_modules/fullcalendar/dist/locale/de');
+
+window.EditElement = require('./modules/editElement');
+window.NewElement = require('./modules/newElement');
+window.User = require('./modules/user');
+GoogleLogin = require('./modules/googleLogin');
 
 $(document).ready(function () {
 
-    require('./scheduler.js');
-    require('./timecap.js');
+    var Scheduler = require('./modules/scheduler');
+    var Timecap = require('./modules/timecap');
+    var TimecapStorage = require('./modules/timecapStorage');
 
     function loadData(start, end, timezone, callback) {
-        Timecap.getEventsForUser('ralphgallin@gmail.com', start.toDate(), end.toDate())
+        Timecap.getEventsForUser(TimecapStorage.get('user').email, start.toDate(), end.toDate())
                 .done(function (data) {
                     var events = parseToEvents(data);
-                    callback(events);
+                    callback(data, events);
                 })
                 .fail(function (err) {
                     console.error(err);
@@ -81,5 +86,10 @@ $(document).ready(function () {
         return event;
     }
 
-    Scheduler.renderScheduler(loadData);
+    if (TimecapStorage.get('user')) {
+        GoogleLogin.renderUser();
+        Scheduler.renderScheduler(loadData);
+    } else {
+        GoogleLogin.renderLogin('main');
+    }
 });

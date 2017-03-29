@@ -33,29 +33,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <img alt="Timecap-Logo" src="assets/images/timecap_logo.png">
             <h1>Timecap</h1>
         </header>
-        <main>
-            <section class="calendar"></section>
-            <form class="detail hidden">
-                <header>
-                    <span class="date" /></span>
-                    <span class="location"></span>
-                </header>
-                <div class="content">
-                    <div class="from">
-                        <label for="from">Beginn</label>
-                        <input id="from" type="time">
-                    </div>
-                    <div class="to">
-                        <label for="to">Ende</label>
-                        <input id="to" type="time">
-                    </div>
-                </div>
-                <div>
-                    <input type="submit" value="Speichern">
-                </div>
-            </form>
-        </main>
+        
+        <section class="user"></section>
+        <main class="calendar"></main>
+        <div class="shadow export"></div>
 
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
         <script src="js/bundle.js"></script>
     </body>
 </html>

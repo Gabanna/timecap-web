@@ -15,21 +15,29 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 /* 
-    Created on : 24.03.2017, 09:27:09
+    Created on : 29.03.2017, 16:52:39
     Author     : Ronny Gallin <ronny.gallin@rg-software.one>
 */
 
-@import '../node_modules/fullcalendar-scheduler/dist/scheduler.min.css';
-@import '../node_modules/fullcalendar/dist/fullcalendar.min.css';
-@import '../node_modules/jquery-ui-dist/jquery-ui.min.css';
-@import '../node_modules/jquery-ui-dist/jquery-ui.structure.min.css';
-@import '../node_modules/jquery-ui-dist/jquery-ui.theme.min.css';
-@import '../lib/jquery.toastmessage.css';
+.user {
+    margin-left: 20px;
 
-@import 'colors';
-@import 'norming';
-@import 'header';
-@import 'schedule';
-@import 'detail';
-@import 'dialog';
-@import 'user';
+    .avatar {
+        display: inline-block;
+        height: 64px;
+        border-radius: 50%;
+        cursor: pointer;
+        width: 64px;
+
+        -webkit-box-shadow: 5px 0px 5px 0px rgba(168,165,168,1);
+        -moz-box-shadow: 5px 0px 5px 0px rgba(168,165,168,1);
+        box-shadow: 5px 0px 5px 0px rgba(168,165,168,1);
+    }
+
+    .container {
+        visibility: hidden;
+
+        .username {
+        }
+    }
+}

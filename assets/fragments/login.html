@@ -1,0 +1,13 @@
+<head>
+    <meta name="google-signin-client_id" content="929754807802-tfihsuraa6ccvsh14badmg5ql3fbbp64.apps.googleusercontent.com">
+</head>
+<div class="login">
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        function onSignIn(googleUser) {
+            GoogleLogin.onSignIn(googleUser)
+        }
+    </script>
+</div>
