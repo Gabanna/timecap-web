@@ -2,12 +2,34 @@
     <meta name="google-signin-client_id" content="929754807802-tfihsuraa6ccvsh14badmg5ql3fbbp64.apps.googleusercontent.com">
 </head>
 <div class="login">
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <h2>Was ist Timecap?</h2>
+    <p>Timecap ist eine Anwendung zum Erfassen und Verwalten von Arbeitszeiten. 
+        Der Name leitet sich von Time Capture ab.
+        Sie können zu verschiedenen Terminen Zeitpunkte erfassen,
+        von denen jeweils zwei zu einem Zeitraum zusammengefasst werden.</p>
+    <p>Um die Erfassung möglichst einfach zu gestalten, können die Zeiten über eine App erfasst werden.
+        Die einzige Voraussetzungen sind dafür ein Android-Endgerät mit <a href="http://praxistipps.chip.de/nfc-was-ist-das_12294">NFC-Funktion.</a></p>
+    <h2>
+        Los gehts
+    </h2>
+    <button class="btnLogin" onclick="signIn()">
+        <img alt="google logo" src="assets/images/the-new-google-logo.jpg">
+        <span>
+            Anmelden
+        </span>
+    </button>
+    <h3>
+        Downloads
+    </h3>
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
+        function signIn() {
+            GoogleLogin.signIn();
+        }
+
         function onSignIn(googleUser) {
-            GoogleLogin.onSignIn(googleUser)
+            GoogleLogin.onSignIn(googleUser);
         }
     </script>
 </div>

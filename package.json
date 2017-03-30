@@ -17,7 +17,8 @@
     "fullcalendar-scheduler": "^1.6.0",
     "jquery-datetimepicker": "^2.5.4",
     "jquery-form-validator": "^2.3.60",
-    "jquery-ui-dist": "^1.12.1"
+    "jquery-ui-dist": "^1.12.1",
+    "js-md5": "^0.4.2"
   },
   "devDependencies": {
     "body-parser": "^1.17.1",
@@ -27,6 +28,6 @@
     "uuid": "^3.0.1"
   },
   "scripts": {
-        "build-js": "browserify js/main.js > js/bundle.js"
+    "build-js": "browserify js/main.js > js/bundle.js"
   }
 }

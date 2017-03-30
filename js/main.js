@@ -30,6 +30,13 @@ GoogleLogin = require('./modules/googleLogin');
 
 $(document).ready(function () {
 
+    gapi.load('auth2', function () {
+        window.auth2 = gapi.auth2.init({
+            client_id: '929754807802-tfihsuraa6ccvsh14badmg5ql3fbbp64.apps.googleusercontent.com',
+            fetch_basic_profile: true
+        });
+    });
+
     var Scheduler = require('./modules/scheduler');
     var Timecap = require('./modules/timecap');
     var TimecapStorage = require('./modules/timecapStorage');

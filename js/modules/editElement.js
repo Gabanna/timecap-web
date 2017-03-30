@@ -20,6 +20,7 @@ module.exports = (function () {
     'use strict';
 
     function init() {
+        var TimecapStorage = require('./timecapStorage');
 
         var dateFormatPicker = 'Y-m-d H:i';
         var dateFormat = 'YYYY-MM-DD HH:mm';

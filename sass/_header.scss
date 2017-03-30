@@ -25,18 +25,18 @@ body > header {
     height: $header-height;
     background-color: $rgse_green;
     color: white;
-    margin-bottom: 20px;
 
-    h1 {
+    h1 {line-height: 1em;
         color: white;
         font-weight: bold;
         margin: 0;
         padding-right: 20px;
         height: $header-height;
-        text-align: right;
         font-size: 6em;
         position: relative;
-        bottom: -70px;
+        bottom: -75px;
+        float: right;
+        display: inline-block;
     }
 
     img {

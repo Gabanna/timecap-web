@@ -23,8 +23,13 @@ module.exports = (function () {
 
     function init() {
         var user = TimecapStorage.get('user');
-        $('.avatar').attr('src', user.imageUrl);
+        $('.avatar > img').attr('src', user.imageUrl);
         $('.username').html(user.email);
+
+        $('.avatar').click(function () {
+            $('.container').slideToggle("slow", function () {
+            });
+        });
     }
 
     var User = {};

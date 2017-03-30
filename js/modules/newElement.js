@@ -19,9 +19,11 @@
 module.exports = (function () {
     'use strict';
 
-    var Timecap = require('./timecap.js');
 
     function init() {
+        var Timecap = require('./timecap');
+        var TimecapStorage = require('./timecapStorage');
+
         var dateFormatPicker = 'Y-m-d H:i';
         var dateFormat = 'YYYY-MM-DD HH:mm';
 

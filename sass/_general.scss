@@ -1,0 +1,45 @@
+$user-width: 200px;
+
+html {
+    color: $rgse_green;
+    height: 100%;
+
+    &, body {
+        margin: 0;
+        padding:0;
+        font-family: sans-serif;
+        line-height: 1.5em;
+    }
+
+    body {
+        height: 100%;
+    }
+
+    .user {
+        float: left;
+        width: $user-width;
+    }
+
+    main {
+        float: right;
+        width: calc(99% - #{$user-width});
+        background-color: white;
+        height: 100%;
+        padding-top: 20px;
+    }
+
+    .shadow {
+        font-size: 0;
+        color: black;
+        font-family: 'Arial';
+    }
+
+    a {
+        text-decoration: none;
+        color: $red_damask;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

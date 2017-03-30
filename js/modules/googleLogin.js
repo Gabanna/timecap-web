@@ -21,21 +21,62 @@ module.exports = (function () {
 
     var TimecapStorage = require('./timecapStorage.js');
 
+    function signIn() {
+        window.auth2.signIn().then(function () {
+            onSignIn(window.auth2.currentUser.get());
+        });
+    }
+
     function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
+        var md5 = require('js-md5');
+
         var profile = googleUser.getBasicProfile();
+
+        var imageUrl = profile.getImageUrl();
+
+        if (imageUrl) {
+            var email = profile.getEmail();
+            var emailHash = md5(email);
+            imageUrl = 'https://www.gravatar.com/avatar/' + emailHash + '?d=retro';
+        }
+
         var user = {
             id: profile.getId(),
             id_token: googleUser.getAuthResponse().id_token,
             fullName: profile.getName(),
             givenName: profile.getGivenName(),
             familyName: profile.getFamilyName(),
-            imageUrl: profile.getImageUrl(),
-            email: profile.getEmail(),
+            imageUrl: imageUrl,
+            email: email,
         };
 
         TimecapStorage.set('user', user);
         location.reload();
+    }
+
+    function onSignOut() {
+        TimecapStorage.set('user', null);
+
+        var auth2;
+
+        if (gapi.auth2) {
+            auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                location.reload();
+            });
+
+        } else {
+            gapi.load('auth2', function () {
+                auth2 = gapi.auth2.init({
+                    client_id: '929754807802-tfihsuraa6ccvsh14badmg5ql3fbbp64.apps.googleusercontent.com',
+                    fetch_basic_profile: false,
+                    scope: 'profile'
+                });
+
+                auth2.
+                        auth2.disconnect();
+            });
+        }
     }
 
     function getSignedInUser() {
@@ -45,15 +86,17 @@ module.exports = (function () {
     function renderLogin(selector) {
         $(selector).load('assets/fragments/login.html');
     }
-    
+
     function renderUser() {
         $('.user').load('assets/fragments/user.html');
     }
 
     var GoogleLogin = {};
+    GoogleLogin.signIn = signIn;
     GoogleLogin.onSignIn = onSignIn;
     GoogleLogin.getSignedInUser = getSignedInUser;
     GoogleLogin.renderLogin = renderLogin;
     GoogleLogin.renderUser = renderUser;
+    GoogleLogin.onSignOut = onSignOut;
     return GoogleLogin;
 })();
