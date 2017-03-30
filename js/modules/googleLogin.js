@@ -31,13 +31,12 @@ module.exports = (function () {
         var md5 = require('js-md5');
 
         var profile = googleUser.getBasicProfile();
-
         var imageUrl = profile.getImageUrl();
 
+        var email = profile.getEmail();
         if (imageUrl) {
-            var email = profile.getEmail();
             var emailHash = md5(email);
-            imageUrl = 'https://www.gravatar.com/avatar/' + emailHash + '?d=retro';
+            imageUrl = 'https://www.gravatar.com/avatar/' + emailHash + '?d=identicon';
         }
 
         var user = {
@@ -56,6 +55,7 @@ module.exports = (function () {
 
     function onSignOut() {
         TimecapStorage.set('user', null);
+        TimecapStorage.persist('user', null);
 
         var auth2;
 
@@ -69,14 +69,17 @@ module.exports = (function () {
             gapi.load('auth2', function () {
                 auth2 = gapi.auth2.init({
                     client_id: '929754807802-tfihsuraa6ccvsh14badmg5ql3fbbp64.apps.googleusercontent.com',
-                    fetch_basic_profile: false,
+                    fetch_basic_profile: true,
                     scope: 'profile'
                 });
 
-                auth2.
-                        auth2.disconnect();
+                auth2.disconnect();
             });
         }
+    }
+
+    function rememberLogin() {
+        TimecapStorage.persist('user');
     }
 
     function getSignedInUser() {
@@ -84,6 +87,7 @@ module.exports = (function () {
     }
 
     function renderLogin(selector) {
+        $('.user').hide();
         $(selector).load('assets/fragments/login.html');
     }
 
@@ -98,5 +102,6 @@ module.exports = (function () {
     GoogleLogin.renderLogin = renderLogin;
     GoogleLogin.renderUser = renderUser;
     GoogleLogin.onSignOut = onSignOut;
+    GoogleLogin.rememberLogin = rememberLogin;
     return GoogleLogin;
 })();

@@ -19,16 +19,38 @@
 module.exports = (function () {
     'use strict';
 
-    var TimecapStorage = require('./timecapStorage.js');
 
     function init() {
+        var GoogleLogin = require('./googleLogin');
+        var TimecapStorage = require('./timecapStorage');
         var user = TimecapStorage.get('user');
+
         $('.avatar > img').attr('src', user.imageUrl);
         $('.username').html(user.email);
 
         $('.avatar').click(function () {
             $('.container').slideToggle("slow", function () {
             });
+        });
+
+        var btn = $('.rememberLogin');
+        if (TimecapStorage.isPersistent('user')) {
+            btn.click(function () {
+                TimecapStorage.persist('user', null);
+                GoogleLogin.renderUser();
+            });
+            btn.val('Anmeldung löschen');
+            
+        } else {
+            btn.click(function () {
+                TimecapStorage.persist('user');
+                GoogleLogin.renderUser();
+            });
+            btn.val('Anmeldung speichern');
+        }
+        
+        $('.logout').click(function() {
+            GoogleLogin.onSignOut();
         });
     }
 

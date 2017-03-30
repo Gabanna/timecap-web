@@ -24,7 +24,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     max-width: 1200px;
     height: 200px;
 
-    .btnLogin {
+    .losGehts {
+        margin-top: 75px;
+    }
+    
+    .path {
+        margin-bottom: 25px;
+    }
+
+    .btnLogin, .btnUpToDown {
         background-color: white;
         padding: 0 10px 0 10px;
         border: 1px solid silver;
