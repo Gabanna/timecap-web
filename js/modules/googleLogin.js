@@ -54,8 +54,7 @@ module.exports = (function () {
     }
 
     function onSignOut() {
-        TimecapStorage.set('user', null);
-        TimecapStorage.persist('user', null);
+        TimecapStorage.remove('user');
 
         var auth2;
 

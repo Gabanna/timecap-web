@@ -18,80 +18,51 @@
 module.exports = (function () {
     'use strict';
 
-    var storageName = 'timecap';
-
-    function getLocalStorage() {
-        var timecapStorage = localStorage.getItem(storageName);
-
-        if (!timecapStorage) {
-            timecapStorage = {};
-            persistLocalStorage(timecapStorage);
-
-        } else {
-            timecapStorage = JSON.parse(timecapStorage);
-        }
-
-        return timecapStorage;
-    }
-
-    function getSessionStorage() {
-        var timecapStorage = sessionStorage.getItem(storageName);
-
-        if (!timecapStorage) {
-            timecapStorage = {};
-            persistSessionStorage(timecapStorage);
-
-        } else {
-            timecapStorage = JSON.parse(timecapStorage);
-        }
-
-        return timecapStorage;
-    }
-
-    function persistLocalStorage(storage) {
-        localStorage.setItem(storageName, JSON.stringify(storage));
-    }
-
-    function persistSessionStorage(storage) {
-        sessionStorage.setItem(storageName, JSON.stringify(storage));
-    }
+    var prefix = 'timecap:';
 
     function get(name) {
-        var result = getSessionStorage()[name];
+        var result = sessionStorage.getItem(prefix + name);
         if (!result) {
-            result = getLocalStorage()[name];
+            result = localStorage.getItem(prefix + name);
         }
+
+        if(result) {
+            result = JSON.parse(result);
+        }
+
         return result;
     }
 
     function set(name, value) {
-        var storage = getSessionStorage();
-        storage[name] = value;
-        persistSessionStorage(storage);
+        sessionStorage.setItem(prefix + name, JSON.stringify(value));
+    }
+
+    function remove(name) {
+        sessionStorage.removeItem(prefix + name);
+        localStorage.removeItem(prefix + name);
     }
 
     function persist(name, value) {
         var v = value;
-        
+
         if (v === undefined) {
-            v = getSessionStorage()[name];
+            v = sessionStorage.getItem(prefix + name);
         }
 
         if (v !== undefined) {
-            var storage = getLocalStorage();
-            storage[name] = v;
-            persistLocalStorage(storage);
+            localStorage.setItem(prefix + name, v);
         }
     }
 
     function isPersistent(name) {
-        var entry = getLocalStorage()[name];
-        return  entry !== null && entry !== undefined;
+        var entry = localStorage.getItem(prefix + name);
+        return entry !== null && entry !== undefined;
     }
 
     var TimecapStorage = {};
     TimecapStorage.get = get;
     TimecapStorage.set = set;
+    TimecapStorage.remove = remove;
     TimecapStorage.persist = persist;
     TimecapStorage.isPersistent = isPersistent;
     return TimecapStorage;

@@ -1,0 +1,12 @@
+html {
+    color: $rgse_green;
+
+    &, body {
+        margin: 0;
+        padding:0;
+    }
+    main {
+        max-width: 1200px;
+        margin: auto;
+    }
+}
