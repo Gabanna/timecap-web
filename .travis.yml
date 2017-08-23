@@ -1,0 +1,10 @@
+language: node_js
+sudo: required
+services:
+  - docker
+before_install:
+- docker pull node
+- docker run node
+
+script:
+- bundle exec rake test
