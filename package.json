@@ -10,7 +10,7 @@
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
-    "postinstall": "sh ./build.sh"
+    "heroku-postbuild": "sh ./build.sh"
   },
   "dependencies": {
     "@angular/common": "4.1.3",
