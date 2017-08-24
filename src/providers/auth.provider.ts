@@ -28,10 +28,10 @@ export class AuthProvider {
     login(): void {
         this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
             .then(response => {
-                console.info(response.user);
                 this.events.publish(loginSuccessful, this.mapUser(response.user));
             })
             .catch(error => {
+                console.error(error);
                 this.events.publish(loginFailed, error);
             });
     }

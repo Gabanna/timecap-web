@@ -113,10 +113,10 @@ var AuthProvider = (function () {
         var _this = this;
         this.afAuth.auth.signInWithPopup(new __WEBPACK_IMPORTED_MODULE_4_firebase_app__["auth"].GoogleAuthProvider())
             .then(function (response) {
-            console.info(response.user);
             _this.events.publish(loginSuccessful, _this.mapUser(response.user));
         })
             .catch(function (error) {
+            console.error(error);
             _this.events.publish(loginFailed, error);
         });
     };
