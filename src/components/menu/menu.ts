@@ -1,9 +1,7 @@
-import { AuthProvider } from './../../providers/auth.provider';
 import { MenuItem } from './../../model/menu.model';
 import { HomePage } from './../../pages/home/home';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Nav } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'menu',
