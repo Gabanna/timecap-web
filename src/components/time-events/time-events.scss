@@ -1,3 +1,7 @@
 time-events {
-
+    .monthview-datetable {
+        .monthview-selected {
+            background-color: map-get($colors, primary) !important;   
+        }
+    }
 }

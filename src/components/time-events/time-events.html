@@ -1,4 +1,7 @@
-<!-- Generated template for the TimeEventsComponent component -->
 <div>
-  {{text}}
+  <button ion-button (click)="calendarMode='month'" [disabled]="calendarMode==='month'">Monat</button>
+  <button ion-button (click)="calendarMode='week'" [disabled]="calendarMode==='week'">Woche</button>
+  <button ion-button (click)="calendarMode='day'" [disabled]="calendarMode==='day'">Tag</button>
 </div>
+<calendar step="30" [eventSource]="timeEvents" [currentDate]="currentDate" [calendarMode]="calendarMode" [startingDayWeek]="1" [startingDayMonth]="1"
+  (onTimeSelected)="onTimeSelected($event)" (onRangeChanged)="reload($event)" [queryMode]="'remote'"></calendar>

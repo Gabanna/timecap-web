@@ -1,13 +1,10 @@
 <section class="account">
-  <span>{{user?.isAnonymous}}</span>
   <ng-container *ngIf="user && !user.isAnonymous">
-    <figure>
+    <figure class="avatar">
       <img src="{{user.photoURL}}">
       <figcaption>
-        <h1>
-          {{user.displayName}}
-          <a (click)="logout()">Logout</a>
-        </h1>
+        {{user.displayName}}
+        <a (click)="logout()"><ion-icon name="log-out" title="Abmelden"></ion-icon></a>
       </figcaption>
     </figure>
   </ng-container>
