@@ -1,10 +1,10 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyBj6MvafGVdiNBsuRvvZ3vRaiJlWo3S6EM",
-    authDomain: "timecapweb.firebaseapp.com",
-    databaseURL: "https://timecapweb.firebaseio.com",
-    projectId: "timecapweb",
-    storageBucket: "timecapweb.appspot.com",
-    messagingSenderId: "25476445368"
+    apiKey: "AIzaSyDX0R0-x3H0iXbBgmq6kB0JCDhydQRiS6g",
+    authDomain: "timecap-web-7a09f.firebaseapp.com",
+    databaseURL: "https://timecap-web-7a09f.firebaseio.com",
+    projectId: "timecap-web-7a09f",
+    storageBucket: "timecap-web-7a09f.appspot.com",
+    messagingSenderId: "843123031004"
 };
 
 export default firebaseConfig;

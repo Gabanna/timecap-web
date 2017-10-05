@@ -2,6 +2,8 @@ import { EventSource } from './../../model/event-source.model';
 import { TimeEvent } from './../../model/time-event.model';
 import { TimeEventProvider } from './../../providers/time-event.provider';
 import { Component } from '@angular/core';
+import { LoadingController } from 'ionic-angular';
+
 import moment from 'moment';
 
 @Component({
@@ -13,9 +15,13 @@ export class TimeEventsComponent {
   calendarMode: CalendarMode = 'month';
   currentDate: Date = new Date();
   timeEvents: EventSource[] = [];
+  loadingOptions = {
+    content: 'Zeiten werden geladen'
+  };
 
   constructor(
-    private timeEventProvider: TimeEventProvider
+    private timeEventProvider: TimeEventProvider,
+    private loadingController: LoadingController
   ) { }
 
   onTimeSelected = (ev: { selectedTime: Date, events: any[] }) => {
@@ -23,10 +29,45 @@ export class TimeEventsComponent {
   };
 
   reload(ev: { startTime: Date, endTime: Date }) {
-    this.timeEventProvider.getTimeEvents().subscribe(events => this.timeEvents = this.parseDates(events));
+    var loading = this.loadingController.create(this.loadingOptions);
+    loading.present();
+    this.timeEventProvider.getTimeEvents(ev.startTime, ev.endTime).subscribe(events => {
+      this.timeEvents = this.parseDates(events);
+      loading.dismiss();
+    });
   }
 
-  parseDates(events: TimeEvent[]): EventSource[] {
+  toToday(): void {
+    this.currentDate = new Date();
+  }
+
+  nextPage(): void{
+    this.modifyDate(true);
+  }
+
+  previousPage(): void {
+    this.modifyDate(false);
+  }
+
+  private modifyDate(next: boolean){
+    var amount = next ? 1 : -1;
+    var newDate: moment.Moment = moment(this.currentDate); 
+    switch(this.calendarMode) {
+      case 'day': 
+        newDate.add(amount, 'day');
+      break;
+      case 'week':
+      newDate.add(amount, 'week');
+      break;
+      case 'month': 
+      newDate.add(amount, 'month');
+      break;
+    }
+
+    this.currentDate = newDate.toDate();
+  }
+
+  private parseDates(events: TimeEvent[]): EventSource[] {
     let result: EventSource[] = [];
 
     events.forEach(event => {

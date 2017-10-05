@@ -17,15 +17,17 @@ export class AuthProvider {
 
 
     constructor(
-        private afAuth: AngularFireAuth,
+       // private afAuth: AngularFireAuth,
         private events: Events
     ) { }
 
     getUser(): Observable<User> {
-        return this.afAuth.authState.map(user => this.mapUser(user));
+        return Observable.create();
+        //return this.afAuth.authState.map(user => this.mapUser(user));
     }
 
     login(): void {
+        /*
         this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
             .then(response => {
                 this.events.publish(loginSuccessful, this.mapUser(response.user));
@@ -33,10 +35,12 @@ export class AuthProvider {
             .catch(error => {
                 console.error(error);
                 this.events.publish(loginFailed, error);
-            });
+            });*/
+
     }
 
     logout(): void {
+        /*
         this.afAuth.auth.signOut()
             .then(() => {
                 this.getUser().subscribe(user => {
@@ -47,6 +51,7 @@ export class AuthProvider {
                 console.error(error);
                 this.events.publish(logoutFailed, error);
             });
+            */
     }
 
     private mapUser(user: firebase.User): User {

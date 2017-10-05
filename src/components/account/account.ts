@@ -19,10 +19,10 @@ export class AccountComponent implements OnInit{
   ngOnInit() {
     this.events.subscribe(loginSuccessful, user => this.user = user);
     this.events.subscribe(logoutSuccessful, user => this.user = user);
-    this.authProvider.getUser().subscribe(user => {
+    /*this.authProvider.getUser().subscribe(user => {
       this.user = user;
       console.info(this.user);
-    });
+    });*/
   }
 
   login() {
